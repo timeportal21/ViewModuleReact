@@ -1,0 +1,11 @@
+.role {
+    padding: 24px;
+}
+.header__card {
+    display: flex;
+    justify-content: space-between;
+}
+.header__title {
+    font-size: larger;
+    font-weight: 500;
+}
