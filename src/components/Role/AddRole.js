@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./Role.css";
-import { Card } from "react-bootstrap";
 import axios from "axios";
+import { Card } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 function AddRole() {
     const [roleName, setRoleName] = useState("");
-
-    const [errorRole, setErrorRole] = useState({});
+    const [errorRole, setErrorRole] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -14,11 +14,15 @@ function AddRole() {
             name: roleName,
         };
         try {
-            const res = await axios.post("/api/users", newRole);
-            // console.log(res);
+            const res = await axios.post("/api/roles", newRole);
+            setRoleName("");
+            setErrorRole(null);
+
+            if (res.data.message) {
+                toast.success(res.data.message);
+            }
         } catch (error) {
-            setErrorRole(error.response.data.error);
-            // console.log("error rep data ", error.response.data);
+            setErrorRole(error.response.data.message);
         }
     };
 
@@ -41,16 +45,15 @@ function AddRole() {
                                 <label className="form-label">Role Name</label>
                                 <input
                                     type="text"
-                                    name="fullName"
+                                    name="roleName"
                                     className="form-control"
                                     onChange={onInputChange}
                                     value={roleName}
-                                    required
                                 />
-                                {errorRole.fullName ? (
+                                {errorRole ? (
                                     <small>
                                         <p className="text-danger">
-                                            {errorRole.fullName}
+                                            {errorRole.name}
                                         </p>
                                     </small>
                                 ) : (
