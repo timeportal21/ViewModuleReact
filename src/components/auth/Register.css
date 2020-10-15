@@ -1,0 +1,24 @@
+.register__form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-content: center;
+}
+
+.auth__box {
+    display: flex;
+    width: 25%;
+    flex-direction: column;
+    margin-top: 8vh;
+    padding: 18px;
+    border-radius: 4px;
+    box-shadow: 0px 4px 11px 1px #888;
+}
+
+.info__header {
+    margin-bottom: 4vh;
+}
+
+.form__box {
+    margin-bottom: 4vh;
+}
