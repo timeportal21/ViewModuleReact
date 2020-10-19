@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import Input from "../shared/components/FormElements/Input";
+import { useForm } from "../shared/hooks/form-hook";
+// import { VALIDATOR_REQUIRE } from "../shared/utils/validators";
+// import InputFields from "../common/inputFields";
 
 const Login = () => {
-    const [loginData, setLoginData] = useState({
-        email: "",
-        password: "",
+    const [formState, inputHandler] = useForm({
+        title: {
+            value: "",
+            isValid: false,
+        },
+        desc: {
+            value: "",
+            isValid: false,
+        },
     });
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(formState);
     };
-
-    const onChange = (e) => {
-        setLoginData({ ...loginData, [e.target.name]: e.target.value });
-    };
-    const { email, password } = loginData;
     return (
         <div className="register__form">
             <div className="auth__box">
@@ -22,34 +29,44 @@ const Login = () => {
                     <p className="lead text-center">Access Your Account</p>
                 </div>
                 <div className="form__box">
-                    <form className="form" onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <input
-                                type="email"
-                                className="form-control"
-                                placeholder="Email Address"
-                                name="email"
-                                value={email}
-                                onChange={onChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="password"
-                                className="form-control"
-                                placeholder="Password"
-                                name="password"
-                                value={password}
-                                onChange={onChange}
-                            />
-                        </div>
-                        <button
-                            type="submit"
-                            className="btn btn-primary btn-block"
-                        >
-                            Login
-                        </button>
+                    <form onSubmit={handleSubmit}>
+                        <Input
+                            element="input"
+                            type="text"
+                            placeholder="Enter First Name"
+                            name="firstname"
+                            label="First Name"
+                            validation={"required|min:6|max:100"}
+                            onInput={inputHandler}
+                        />
+                        <Input
+                            type="text"
+                            name="desc"
+                            label="Description"
+                            validation={"required|min:6|max:100"}
+                            onInput={inputHandler}
+                        />
+
+                        <button type="submit">Submit</button>
                     </form>
+                    {/* <form onSubmit={handleSubmit}>
+                        <InputFields
+                            type="text"
+                            name="firstname"
+                            placeholder="Enter First Name"
+                            onChange={handleChange}
+                            validation={"required|min:6|max:10"}
+                        />
+                        <InputFields
+                            type="text"
+                            name="lastName"
+                            placeholder="Enter Last Name"
+                            onChange={handleChange}
+                            validation={"required|min:6|max:100"}
+                        />
+
+                        <button type="submit">Submit</button>
+                    </form> */}
                 </div>
                 <p className="my-1">
                     Dont't have an account?

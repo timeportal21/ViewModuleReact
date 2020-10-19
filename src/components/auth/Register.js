@@ -11,6 +11,11 @@ const Register = () => {
     });
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (password !== password2) {
+            console.log("password not match");
+        } else {
+            console.log(registerData);
+        }
     };
 
     const onChange = (e) => {
@@ -34,6 +39,7 @@ const Register = () => {
                                 name="name"
                                 value={name}
                                 onChange={onChange}
+                                required
                             />
                         </div>
                         <div className="form-group">
@@ -44,6 +50,7 @@ const Register = () => {
                                 name="email"
                                 value={email}
                                 onChange={onChange}
+                                required
                             />
                             <small className="form-text text-muted">
                                 This site uses Gravatar so if you want a profile
@@ -58,6 +65,7 @@ const Register = () => {
                                 name="password"
                                 value={password}
                                 onChange={onChange}
+                                required
                             />
                         </div>
                         <div className="form-group">
@@ -68,6 +76,7 @@ const Register = () => {
                                 name="password2"
                                 value={password2}
                                 onChange={onChange}
+                                required
                             />
                         </div>
                         <button
